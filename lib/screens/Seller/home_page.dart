@@ -362,6 +362,7 @@ class _DrinkPageState extends State<DrinkPage> {
       Future<Drink> drink = drinkProvider.getDrink( await shopID.getShopID());
       return drink;
     }
+  /* Test */
     return FutureBuilder(
         future: fetchDrink(),
         builder: (BuildContext context, AsyncSnapshot<Drink> snapshot) {
