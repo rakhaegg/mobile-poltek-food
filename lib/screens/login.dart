@@ -168,7 +168,7 @@ class _LoginState extends State<Login> {
         //final number = await shopProvider.checkShop(await provider.getUserID());
 
       }else if (dropdownValue == "Buyer"){
-        await provider.register(
+        await provider.login(
             emailController.text,
             passwordController.text,
             deviceName,

@@ -2,6 +2,7 @@
 
 
 import 'package:flutter/foundation.dart';
+import 'package:my_first_app/data/api/buyer_api.dart';
 import 'package:my_first_app/data/api/seller_api.dart';
 import 'package:my_first_app/data/models/shop.dart';
 import 'package:my_first_app/providers/AuthProvider.dart';
@@ -13,6 +14,7 @@ class ShopProvider extends ChangeNotifier{
   bool isExists = false;
   
   late SellerApiService apiService;
+  late BuyerApiService apiBuyerService;
   late AuthProvider authProvider;
   String idShop = "";
 
@@ -20,6 +22,7 @@ class ShopProvider extends ChangeNotifier{
   ShopProvider(AuthProvider authProvider){
     this.authProvider = authProvider;
     this.apiService = SellerApiService(authProvider.token);
+    this.apiBuyerService = BuyerApiService(authProvider.token);
     init();
   }
 
@@ -52,6 +55,17 @@ class ShopProvider extends ChangeNotifier{
     String text = await apiService.getShop(await getShopID(), token);
     final jsonResponse = json.decode(text);
     return new Shop.fromJson(jsonResponse);
+
+
+  }
+  Future<Shop> getAllShop()async{
+
+    //print(await authProvider.getShopID());
+    //setShopID(await authProvider.getShopID());
+    this.apiBuyerService = BuyerApiService(authProvider.token);
+    String token = await authProvider.getToken();
+
+    return new Shop.fromJson(json.decode(await apiBuyerService.getShop( token)));
 
 
   }

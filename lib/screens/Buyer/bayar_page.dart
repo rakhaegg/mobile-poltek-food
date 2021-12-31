@@ -16,7 +16,13 @@ class _BayarPageState extends State<BayarPage> {
     super.dispose();
     alamatRumah.dispose();
   }
-
+  Widget build(BuildContext context){
+    return Scaffold(
+      appBar: AppBar(title : Text("Pemesanan")),
+      body: Container(),
+    );
+  }
+  /*
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -100,4 +106,6 @@ class _BayarPageState extends State<BayarPage> {
       ),
     );
   }
+
+   */
 }

@@ -10,8 +10,8 @@ String shopToJson(Shop data) => json.encode(data.toJson());
 
 class Shop {
     Shop({
-        required this.status,
-        required this.data,
+        required   this.status,
+        required  this.data,
     });
 
     String status;
@@ -30,7 +30,7 @@ class Shop {
 
 class Data {
     Data({
-        required this.user,
+      required  this.user,
     });
 
     List<User> user;
@@ -46,32 +46,32 @@ class Data {
 
 class User {
     User({
-       required  this.id,
-      required   this.name,
-       required this.noPhone,
-
-        required this.image
+        required   this.id,
+        required    this.name,
+        required    this.address,
+        required   this.noPhone,
+        required   this.image,
     });
 
     String id;
     String name;
+    String address;
     String noPhone;
-
     String image;
 
     factory User.fromJson(Map<String, dynamic> json) => User(
         id: json["id"],
         name: json["name"],
+        address: json["address"],
         noPhone: json["no_phone"],
-
-        image: json["image"]
+        image: json["image"],
     );
 
     Map<String, dynamic> toJson() => {
         "id": id,
         "name": name,
+        "address": address,
         "no_phone": noPhone,
-
-        "image" :image
+        "image": image,
     };
 }

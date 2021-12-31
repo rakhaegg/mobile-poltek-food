@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:my_first_app/data/api/buyer_api.dart';
 import 'package:my_first_app/data/models/drink.dart';
 
 import 'package:my_first_app/providers/AuthProvider.dart';
@@ -10,11 +11,12 @@ class DrinkProvider extends ChangeNotifier {
 
   late SellerApiService apiService;
   late AuthProvider authProvider;
+  late BuyerApiService apiBuyerService;
 
   DrinkProvider(AuthProvider authProvider) {
     this.authProvider = authProvider;
     this.apiService = SellerApiService(authProvider.token);
-
+    this.apiBuyerService = BuyerApiService(authProvider.token);
 
   }
 
@@ -23,6 +25,15 @@ class DrinkProvider extends ChangeNotifier {
 
     String text = await apiService.fetchDrink(userID, token);
     final jsonResponse = json.decode(text);
+    return new Drink.fromJson(jsonResponse);
+  }
+
+  Future<Drink> getDrinkForBuyer(String shopId) async {
+    String token = await authProvider.getToken();
+
+    String text = await apiBuyerService.getShopByIdDrink(shopId, token);
+    final jsonResponse = json.decode(text);
+
     return new Drink.fromJson(jsonResponse);
   }
 

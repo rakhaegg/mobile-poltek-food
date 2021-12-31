@@ -5,6 +5,9 @@ import 'package:my_first_app/screens/Seller/CreatePage.dart';
 import 'package:my_first_app/screens/Seller/home_page.dart';
 import 'package:provider/provider.dart';
 
+import 'bayar_page.dart';
+import 'home_page.dart';
+
 class HomeBuyer extends StatefulWidget {
   @override
   _HomeBuyerState createState() => _HomeBuyerState();
@@ -13,7 +16,7 @@ class HomeBuyer extends StatefulWidget {
 class _HomeBuyerState extends State<HomeBuyer> {
   int selectedIndex = 0;
   List<Widget> widgetOptions = [
-    HomePage(),
+    HomeBuyerPage(),
     BayarPage(),
     //Categories(),
   ];

@@ -3,6 +3,8 @@ import 'package:my_first_app/providers/AuthProvider.dart';
 import 'package:my_first_app/providers/DrinkProvider.dart';
 import 'package:my_first_app/providers/FoodProvider.dart';
 import 'package:my_first_app/providers/ShopProvider.dart';
+import 'package:my_first_app/screens/Buyer/food_page.dart';
+import 'package:my_first_app/screens/Buyer/home.dart';
 
 import 'package:my_first_app/screens/Seller/home.dart';
 import 'package:my_first_app/screens/Driver/home_driver.dart';
@@ -51,7 +53,7 @@ class MyApp extends StatelessWidget {
                       }else if (authProvider.type == "Buyer"){
                         print("Ini Halaman Buyer");
 
-                        return Container();
+                        return HomeBuyer();
                       }else{
                         return CircularProgressIndicator();
                       }

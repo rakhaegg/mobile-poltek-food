@@ -178,6 +178,7 @@ class _RegisterState extends State<Register> {
         );
 
       }else if (dropdownValue == "Buyer"){
+        print("register buyer");
         await provider.register(
             usernameController.text,
             passwordController.text,

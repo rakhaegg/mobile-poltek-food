@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_first_app/data/api/buyer_api.dart';
 import 'package:my_first_app/data/api/driver_api.dart';
 import 'package:my_first_app/data/api/seller_api.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -12,6 +13,7 @@ class AuthProvider extends ChangeNotifier {
   late String token;
   late SellerApiService apiSellerService;
   late DriverApiService apiDriverService;
+  late BuyerApiService apiBuyerService;
   late String userID;
   late String type;
   late bool isExists ;
@@ -29,6 +31,8 @@ class AuthProvider extends ChangeNotifier {
 
     this.apiSellerService = new SellerApiService(this.token);
     this.apiDriverService = new DriverApiService(this.token);
+    this.apiBuyerService = new BuyerApiService(this.token);
+
     this.type = await getType();
     this.userID = await getUserID();
 
@@ -48,6 +52,9 @@ class AuthProvider extends ChangeNotifier {
       setUserID(userID["data"]["userId"]);
       notifyListeners();
     }else if(type == "Buyer"){
+      Map userID = json.decode( await apiBuyerService.register(username , password , fullname)) as Map;
+      setUserID(userID["data"]["userId"]);
+      notifyListeners();
 
     }
     this.isAuthenticated = false;
@@ -57,17 +64,13 @@ class AuthProvider extends ChangeNotifier {
   Future<void> login(String email, String password, String deviceName , String type) async {
 
     if(type == "Driver"){
-      print("asd");
       Map userID = json.decode( await apiDriverService.login(email , password , deviceName)) as Map;
-
       setUserID(userID["data"]["id"]);
       setToken(userID["data"]["accessToken"]);
       setType("Driver");
 
       notifyListeners();
     }else if(type =="Seller"){
-      print("Seller");
-
       Map userID = json.decode( await apiSellerService.login(email , password , deviceName)) as Map;
       setUserID(userID["data"]["id"]);
       setToken(userID["data"]["accessToken"]);
@@ -83,7 +86,13 @@ class AuthProvider extends ChangeNotifier {
 
       notifyListeners();
     }else if(type == "Buyer"){
-     // Map number = await apiSellerService.check( await getToken());
+
+      final  Map userID = json.decode( await apiBuyerService.login(email , password , deviceName)) as Map;
+      setUserID(userID["data"]["id"]);
+      setToken(userID["data"]["accessToken"]);
+      setType("Buyer");
+      this.type = "Buyer";
+
 
     }
     this.isAuthenticated = true;
