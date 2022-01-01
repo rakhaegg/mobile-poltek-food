@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:my_first_app/providers/AuthProvider.dart';
 import 'package:my_first_app/providers/DrinkProvider.dart';
 import 'package:my_first_app/providers/FoodProvider.dart';
+import 'package:my_first_app/providers/PesanProvider.dart';
 import 'package:my_first_app/providers/ShopProvider.dart';
 import 'package:my_first_app/screens/Buyer/food_page.dart';
 import 'package:my_first_app/screens/Buyer/home.dart';
@@ -29,7 +30,9 @@ class MyApp extends StatelessWidget {
                 ChangeNotifierProvider<DrinkProvider>(
                     create: (context) => DrinkProvider(authProvider)),
                 ChangeNotifierProvider<ShopProvider>(
-                    create: (context) => ShopProvider(authProvider))
+                    create: (context) => ShopProvider(authProvider)),
+                ChangeNotifierProvider<PesanProvider>(
+                    create: (context) => PesanProvider(authProvider))
               ],
               child: MaterialApp(title: 'Pesan Antar', routes: {
                 '/': (context) {

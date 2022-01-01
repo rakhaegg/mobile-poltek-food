@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_first_app/providers/PesanProvider.dart';
 import 'package:provider/provider.dart';
 
 class BayarPage extends StatefulWidget {
@@ -16,10 +17,9 @@ class _BayarPageState extends State<BayarPage> {
     super.dispose();
     alamatRumah.dispose();
   }
-  Widget build(BuildContext context){
+  Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title : Text("Pemesanan")),
-      body: Container(),
+
     );
   }
   /*
@@ -40,7 +40,7 @@ class _BayarPageState extends State<BayarPage> {
                   itemBuilder: (context, index) {
                     var food = bayar.food[index];
                     return ListTile(
-                      title: Text(food.name),
+                      title: Text(food.),
                       subtitle: Text(food.harga),
                     );
                   }),
@@ -107,5 +107,7 @@ class _BayarPageState extends State<BayarPage> {
     );
   }
 
+
    */
+
 }

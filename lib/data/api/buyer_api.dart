@@ -51,7 +51,6 @@ class BuyerApiService {
 
   Future<String> register(String username,  String password, String fullname) async {
     String uri = baseUrl + 'buyer';
-    print(password);
 
     http.Response response = await http.post(Uri.parse(uri),
         headers: {
@@ -149,7 +148,6 @@ class BuyerApiService {
       throw Exception(errorMessage);
     }
     // return token
-    print(token);
     return response.body;
   }
 
@@ -386,7 +384,6 @@ class BuyerApiService {
       throw Exception(errorMessage);
     }
     // return token
-    print(response.body);
     return response.body;
   }
   Future<String> getShopByIdDrink(String shopId ) async{

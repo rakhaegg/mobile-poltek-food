@@ -5,6 +5,7 @@ import 'package:my_first_app/data/models/drink.dart';
 import 'package:my_first_app/data/models/food.dart';
 import 'package:my_first_app/providers/DrinkProvider.dart';
 import 'package:my_first_app/providers/FoodProvider.dart';
+import 'package:my_first_app/providers/PesanProvider.dart';
 import 'package:provider/provider.dart';
 
 class DetailPageShop extends StatefulWidget {
@@ -16,7 +17,7 @@ class DetailPageShop extends StatefulWidget {
 }
 
 class _DetailPageShopState extends State<DetailPageShop> {
-
+  List yangDiPesan = [];
 
   @override
   Widget build(BuildContext context) {
@@ -29,6 +30,7 @@ class _DetailPageShopState extends State<DetailPageShop> {
       return food;
     }
 
+    final pesanProve = Provider.of<PesanProvider>(context);
 
     Future<Drink> fetchDrink() async {
       Drink drink = await drinkProv.getDrinkForBuyer(arguments["idShop"]);
@@ -74,17 +76,31 @@ class _DetailPageShopState extends State<DetailPageShop> {
                                       Row(
                                         children: [
                                           IconButton(
-                                            onPressed: () {},
+                                            onPressed: () {
+                                              Provider.of<PesanProvider>(context , listen : false).addFood(snapshot.data?.data.food[index] as FoodElement);
+                                              setState(() {
+                                                yangDiPesan.add(snapshot.data?.data.food[index] as FoodElement);
+
+                                              });
+                                            },
                                             icon: const Icon(Icons.add),
                                           ),
                                           SizedBox(width: 5),
 
                                           Text(
-                                              "0"
+
+                                              Provider.of<PesanProvider>(context
+                                                  )
+                                                  .getLengthFood(snapshot.data?.data.food[index] as FoodElement).toString()
+
                                           ),
                                           SizedBox(width: 5),
                                           IconButton(
-                                            onPressed: () {},
+                                            onPressed: () {
+
+                                              Provider.of<PesanProvider>(context, listen: false)
+                                                  .removeFood(snapshot.data?.data.food[index] as FoodElement);
+                                            },
                                             icon: const Icon(Icons.remove),
                                           ),
                                         ],
@@ -144,17 +160,28 @@ class _DetailPageShopState extends State<DetailPageShop> {
                                           Row(
                                             children: [
                                               IconButton(
-                                                onPressed: () {},
+                                                onPressed: () {
+                                                  Provider.of<PesanProvider>(context , listen : false).addDrink(snapshot.data?.data.drink[index] as DrinkElement);
+                                                  setState(() {
+                                                    yangDiPesan.add(snapshot.data?.data.drink[index] as DrinkElement);
+
+                                                  });
+                                                },
                                                 icon: const Icon(Icons.add),
                                               ),
                                               SizedBox(width: 5),
 
                                               Text(
-                                                  "0"
+                                                  Provider.of<PesanProvider>(context
+                                                  )
+                                                      .getLengethDrink(snapshot.data?.data.drink[index] as DrinkElement).toString()
                                               ),
                                               SizedBox(width: 5),
                                               IconButton(
-                                                onPressed: () {},
+                                                onPressed: () {
+                                                  Provider.of<PesanProvider>(context, listen: false)
+                                                      .removeDrink(snapshot.data?.data.drink[index] as DrinkElement);
+                                                },
                                                 icon: const Icon(Icons.remove),
                                               ),
                                             ],

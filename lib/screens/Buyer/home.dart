@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_first_app/providers/AuthProvider.dart';
 import 'package:my_first_app/providers/ShopProvider.dart';
+import 'package:my_first_app/screens/Buyer/riwayat_page.dart';
 import 'package:my_first_app/screens/Seller/CreatePage.dart';
 import 'package:my_first_app/screens/Seller/home_page.dart';
 import 'package:provider/provider.dart';
@@ -18,6 +19,7 @@ class _HomeBuyerState extends State<HomeBuyer> {
   List<Widget> widgetOptions = [
     HomeBuyerPage(),
     BayarPage(),
+    RiwayatPage()
     //Categories(),
   ];
 
@@ -33,19 +35,25 @@ class _HomeBuyerState extends State<HomeBuyer> {
             elevation: 0,
             items: <BottomNavigationBarItem>[
               BottomNavigationBarItem(
-                icon: Icon(Icons.home),
+                icon: const Icon(Icons.home),
                 label: 'Home',
-                backgroundColor: Colors.red,
+                backgroundColor: Colors.lightBlue,
+              ),
+
+              BottomNavigationBarItem(
+                icon: const Icon(Icons.message),
+                label: 'Pesan',
+                backgroundColor: Colors.lightBlue,
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.create),
-                label: 'Create',
-                backgroundColor: Colors.red,
+                icon: const Icon(Icons.my_library_books),
+                label: 'Riwayat',
+                backgroundColor: Colors.lightBlue,
               ),
               BottomNavigationBarItem(
                 icon: Icon(Icons.logout),
                 label: 'Exit',
-                backgroundColor: Colors.pink,
+                backgroundColor: Colors.lightBlue,
               )],
             currentIndex: selectedIndex,
             onTap: onItemTapped,
@@ -55,7 +63,7 @@ class _HomeBuyerState extends State<HomeBuyer> {
   }
 
   Future<void> onItemTapped(int index) async {
-    if (index == 2) {
+    if (index == 3) {
       final AuthProvider provider =
       Provider.of<AuthProvider>(context, listen: false);
 
