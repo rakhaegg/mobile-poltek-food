@@ -109,37 +109,89 @@ class _DetailPageShopState extends State<DetailPageShop> {
                           return Text('Result: ${snapshot.data}');
                     }
                   }
-                /*
-                  FutureBuilder(
+        ),
+
+                  FutureBuilder<Drink>(
                       future: fetchDrink(),
                       builder: (BuildContext context, AsyncSnapshot<Drink> snapshot) {
-                        if (snapshot.data != null) {
-                          ListView.builder(
-                              scrollDirection: Axis.vertical,
-                              shrinkWrap: true,
-                              itemCount: snapshot.data?.data.drink.length,
-                              itemBuilder: (context, index) {
-                                return ListTile(
-                                  leading: Image.memory(base64Decode(snapshot
-                                      .data?.data.drink[index].image as String)),
-                                  title: Text(
-                                      snapshot.data?.data.drink[index].name as String),
-                                  subtitle: Text(snapshot.data?.data.drink[index].price
-                                      .toString() as String),
-                                );
-                              });
-                        } else if (snapshot.hasError) {}
-                        print(snapshot.toString());
-                        return new CircularProgressIndicator();
+                        switch(snapshot.connectionState) {
+                          case ConnectionState.waiting :
+                            return CircularProgressIndicator();
+                          case ConnectionState.done :
+                            if (snapshot.data != null) {
+                              print("ad");
+                              return ListView.builder(
+                                  scrollDirection: Axis.vertical,
+                                  shrinkWrap: true,
+                                  itemCount: snapshot.data?.data.drink.length,
+                                  itemBuilder: (context, index) {
+                                    return ListTile(
+                                      leading: Image.memory(base64Decode(snapshot
+                                          .data?.data.drink[index].image as String)),
+                                      title: Text(
+                                          snapshot.data?.data.drink[index].name as String),
+                                      subtitle: Column(
+                                        children: <Widget>[
+                                          SizedBox(height: 10),
+                                          Row(
+                                            children: [
+                                              Text("Harga Minuman : "),
+                                              Text(snapshot.data?.data.drink[index].price
+                                                  .toString() as String),
+                                            ],
+                                          ),
+                                          SizedBox(height: 10),
+                                          Row(
+                                            children: [
+                                              IconButton(
+                                                onPressed: () {},
+                                                icon: const Icon(Icons.add),
+                                              ),
+                                              SizedBox(width: 5),
+
+                                              Text(
+                                                  "0"
+                                              ),
+                                              SizedBox(width: 5),
+                                              IconButton(
+                                                onPressed: () {},
+                                                icon: const Icon(Icons.remove),
+                                              ),
+                                            ],
+                                          )
+                                        ],
+                                      )
+
+
+                                    );
+                                  });
+                            } else if (snapshot.hasError) {
+                              print(snapshot.toString());
+                            } else if (snapshot.data?.data.drink.length == 0) {
+                              return Container(
+                                  child: Text("Toko Belum Memiliki Menu")
+                              );
+                            }
+                            return CircularProgressIndicator();
+
+                          default:
+                            if (snapshot.hasError)
+                              return Text('Error: ${snapshot.error}');
+                            else
+                              return Text('Result: ${snapshot.data}');
+                        }
+
+
+
                       }),
 
 
 
-                   */
-              )
-            ]
-            ))
-    );
+
+            ]  )
+
+            ));
+
   }
   }
 
