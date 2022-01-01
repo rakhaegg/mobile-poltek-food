@@ -17,12 +17,7 @@ class _BayarPageState extends State<BayarPage> {
     super.dispose();
     alamatRumah.dispose();
   }
-  Widget build(BuildContext context) {
-    return Scaffold(
 
-    );
-  }
-  /*
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,8 +35,8 @@ class _BayarPageState extends State<BayarPage> {
                   itemBuilder: (context, index) {
                     var food = bayar.food[index];
                     return ListTile(
-                      title: Text(food.),
-                      subtitle: Text(food.harga),
+                      title: Text(food.name),
+                      subtitle: Text(food.price.toString()),
                     );
                   }),
               ListView.builder(
@@ -51,7 +46,7 @@ class _BayarPageState extends State<BayarPage> {
                     var drink = bayar.drink[index];
                     return ListTile(
                       title: Text(drink.name),
-                      subtitle: Text(drink.harga),
+                      subtitle: Text(drink.price.toString()),
                     );
                   }),
 
@@ -91,7 +86,7 @@ class _BayarPageState extends State<BayarPage> {
                                       .food[index];
                                   return ListTile(
                                     title: Text(food.name),
-                                    subtitle: Text(food.harga),
+                                    subtitle: Text(food.price.toString()),
                                   );
                                 }),
                           ],
@@ -108,6 +103,5 @@ class _BayarPageState extends State<BayarPage> {
   }
 
 
-   */
 
 }

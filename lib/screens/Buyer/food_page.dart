@@ -77,7 +77,7 @@ class _DetailPageShopState extends State<DetailPageShop> {
                                         children: [
                                           IconButton(
                                             onPressed: () {
-                                              Provider.of<PesanProvider>(context , listen : false).addFood(snapshot.data?.data.food[index] as FoodElement);
+                                              Provider.of<PesanProvider>(context , listen : false).addFood(snapshot.data?.data.food[index] as FoodElement , arguments["idShop"]);
                                               setState(() {
                                                 yangDiPesan.add(snapshot.data?.data.food[index] as FoodElement);
 
@@ -161,7 +161,7 @@ class _DetailPageShopState extends State<DetailPageShop> {
                                             children: [
                                               IconButton(
                                                 onPressed: () {
-                                                  Provider.of<PesanProvider>(context , listen : false).addDrink(snapshot.data?.data.drink[index] as DrinkElement);
+                                                  Provider.of<PesanProvider>(context , listen : false).addDrink(snapshot.data?.data.drink[index] as DrinkElement , arguments["idShop"]);
                                                   setState(() {
                                                     yangDiPesan.add(snapshot.data?.data.drink[index] as DrinkElement);
 
