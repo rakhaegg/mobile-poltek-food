@@ -31,11 +31,11 @@ class FoodProvider extends ChangeNotifier {
   }
   Future<Food> getFoodForBuyer(String shopId) async {
     String token = await authProvider.getToken();
-
+    print(shopId);
     String text = await apiBuyerService.getShopByIdFood(shopId);
     final jsonResponse = json.decode(text);
     print(jsonResponse);
-
+    print("get food for buyer");
     return new Food.fromJson(jsonResponse);
   }
 

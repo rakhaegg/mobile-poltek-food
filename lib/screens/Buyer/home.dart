@@ -23,9 +23,7 @@ class _HomeBuyerState extends State<HomeBuyer> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Welcome to Flutter',
-      home: Scaffold(
+    return Scaffold(
         body: widgetOptions.elementAt(selectedIndex),
         bottomNavigationBar: BottomAppBar(
           shape: CircularNotchedRectangle(),
@@ -53,8 +51,7 @@ class _HomeBuyerState extends State<HomeBuyer> {
             onTap: onItemTapped,
           ),
         ),
-      ),
-    );
+      );
   }
 
   Future<void> onItemTapped(int index) async {

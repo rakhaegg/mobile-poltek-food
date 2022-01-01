@@ -17,6 +17,7 @@ class HomeBuyerPage extends StatefulWidget {
 }
 
 class _HomeBuyerPage extends State<HomeBuyerPage> {
+
   @override
   Widget build(BuildContext context) {
     //final provider = Provider.of<ShopProvider>(context);
@@ -33,6 +34,7 @@ class _HomeBuyerPage extends State<HomeBuyerPage> {
       return shop;
     }
 
+
     return new Scaffold(
         appBar: AppBar(title: Text("Buyer")),
         body: SingleChildScrollView(
@@ -44,26 +46,29 @@ class _HomeBuyerPage extends State<HomeBuyerPage> {
                   builder:
                       (BuildContext context, AsyncSnapshot<Shop> snapshot) {
                     if (snapshot.data != null) {
-                      return ListView.builder(
+                        return ListView.builder(
                         scrollDirection: Axis.vertical,
                         physics: NeverScrollableScrollPhysics(),
                         shrinkWrap: true,
                         itemCount: snapshot.data!.data.user.length,
                         itemBuilder: (context, index) {
-                          return new ListTile(
+                          return  ListTile(
                             leading: Image.memory(base64Decode(snapshot
                                 .data?.data.user[index].image as String)),
                             title: Text(
                                 snapshot.data?.data.user[index].name as String),
                             subtitle: Text(snapshot
                                 .data?.data.user[index].noPhone as String),
-                            onTap: () => {
-                               Navigator.push(context, MaterialPageRoute(builder: (context) => DetailPageShop(
-                                 shopId: snapshot
-                                .data?.data.user[index].id as String)
-                                )
-                              )
+
+                            onTap: () {
+                               Navigator.pushNamed(context, '/detailPageShop' , arguments: {
+                                 "idShop" : snapshot
+                                     .data?.data.user[index].id as String
+                               });
+
                             },
+
+
                           );
                         },
                       );

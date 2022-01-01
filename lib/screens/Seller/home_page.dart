@@ -74,6 +74,7 @@ class _NewWidgetState extends State<NewWidget> {
           if (snapshot.data != null) {
             return ListView.builder(
                 shrinkWrap: true,
+
                 itemCount: snapshot.data!.data.user.length,
                 itemBuilder: (BuildContext context, index) {
                   return Container(
@@ -140,6 +141,8 @@ class _FoodPageState extends State<FoodPage> {
           if (snapshot.data != null) {
             return ListView.builder(
                 shrinkWrap: true,
+                scrollDirection: Axis.vertical,
+                physics: NeverScrollableScrollPhysics(),
                 itemCount: snapshot.data!.data.food.length,
                 itemBuilder: (BuildContext context, index) {
                   return ListTile(

@@ -175,6 +175,7 @@ class BuyerApiService {
       throw Exception(errorMessage);
     }
     // return token
+
     return response.body;
   }
   Future<String> addFood(String name , int price , String image ,String id , String token) async {
@@ -385,15 +386,15 @@ class BuyerApiService {
       throw Exception(errorMessage);
     }
     // return token
+    print(response.body);
     return response.body;
   }
-  Future<String> getShopByIdDrink(String shopId , String token) async{
-    String uri = baseUrl + 'seller/shops/drink/$shopId';
+  Future<String> getShopByIdDrink(String shopId ) async{
+    String uri = baseUrl + 'seller/shops/drink/buyer/$shopId';
 
     http.Response response = await http.get(Uri.parse(uri),
       headers: {
         HttpHeaders.contentTypeHeader: 'application/json',
-        HttpHeaders.authorizationHeader :"Bearer $token"
       },
     );
 

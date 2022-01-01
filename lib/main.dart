@@ -68,7 +68,7 @@ class MyApp extends StatelessWidget {
                 '/homeSeller': (context) => HomeSeller(),
                 '/homePage': (context) => HomePage(),
                 '/homeDriver': (context) => HomeDriver(),
-
+                '/detailPageShop' : (context) => DetailPageShop()
               }));
         }));
   }

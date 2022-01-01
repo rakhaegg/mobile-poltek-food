@@ -29,9 +29,8 @@ class DrinkProvider extends ChangeNotifier {
   }
 
   Future<Drink> getDrinkForBuyer(String shopId) async {
-    String token = await authProvider.getToken();
 
-    String text = await apiBuyerService.getShopByIdDrink(shopId, token);
+    String text = await apiBuyerService.getShopByIdDrink(shopId);
     final jsonResponse = json.decode(text);
 
     return new Drink.fromJson(jsonResponse);
