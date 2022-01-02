@@ -1,7 +1,10 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:my_first_app/data/api/buyer_api.dart';
 import 'package:my_first_app/data/models/drink.dart';
 import 'package:my_first_app/data/models/food.dart';
+import 'package:my_first_app/data/models/pesanForBuyer.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'AuthProvider.dart';
@@ -19,10 +22,32 @@ class PesanProvider extends ChangeNotifier {
     this.authProvider = authProvider;
     this.apiBuyerService = BuyerApiService(authProvider.token);
   }
-  List<FoodElement> getFood() {
-    return food;
+  List<Map<String, dynamic>> getFoodForPesan() {
+    return food.map((e) => {
+      "id" : e.id,
+      "name" :e.name,
+      "price" : e.price,
+    }).toList();
+  }
+  List<Map<String, dynamic>> getDrinkForPesan() {
+    return drink.map((e) => {
+      "id" : e.id,
+      "name" :e.name,
+      "price" : e.price,
+
+    }).toList();
+  }
+  Future<void> addPesanToServer(Future<String> buyer_id , Future<String> shop_id , String daftar , int total , String daftar_drink) async {
+    print(daftar);
+    await apiBuyerService.addPesanToServer(await buyer_id, await shop_id, daftar, total , daftar_drink);
   }
 
+  Future<PesanForBuyer> fetchRiwayatPesan(String buyerID) async{
+    String text =  await apiBuyerService.getRiwayatBuyer(buyerID);
+    final jsonResponse = json.decode(text);
+
+    return new PesanForBuyer.fromJson(jsonResponse);
+  }
   int getLengthFood(FoodElement item) {
     int count = 0;
     for (int i = 0; i < food.length; i++) {
@@ -42,26 +67,19 @@ class PesanProvider extends ChangeNotifier {
     return count;
   }
 
-  double totalFood() {
-    double total = 0;
-    /*
+
+  int total() {
+    int total = 0;
+
     for (var i = 0; i < food.length; i++) {
-      total = total + double.parse(food[i].harga );
+      total = total + food[i].price;
+    }
+    for (var i = 0 ; i < drink.length ; i++){
+      total = total + drink[i].price;
     }
 
-     */
-    return total;
-  }
 
-  double total() {
-    double total = 0;
-    /*
-    for (var i = 0; i < drink.length; i++) {
-      total = total + double.parse(drink[i].harga);
-    }
-    total = total + totalFood();
 
-     */
     return total;
   }
   Future<void> setType(String idShop) async{

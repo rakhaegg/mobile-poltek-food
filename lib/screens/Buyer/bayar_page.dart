@@ -1,4 +1,7 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:my_first_app/providers/AuthProvider.dart';
 import 'package:my_first_app/providers/PesanProvider.dart';
 import 'package:provider/provider.dart';
 
@@ -26,31 +29,67 @@ class _BayarPageState extends State<BayarPage> {
         return SingleChildScrollView(
           child: Column(
             children: [
-              TextField(
-                controller: alamatRumah,
-              ),
-              ListView.builder(
-                  shrinkWrap: true,
-                  itemCount: Provider.of<PesanProvider>(context).food.length,
-                  itemBuilder: (context, index) {
-                    var food = bayar.food[index];
-                    return ListTile(
-                      title: Text(food.name),
-                      subtitle: Text(food.price.toString()),
-                    );
-                  }),
-              ListView.builder(
-                  shrinkWrap: true,
-                  itemCount: Provider.of<PesanProvider>(context).drink.length,
-                  itemBuilder: (context, index) {
-                    var drink = bayar.drink[index];
-                    return ListTile(
-                      title: Text(drink.name),
-                      subtitle: Text(drink.price.toString()),
-                    );
-                  }),
+              Container(
+                  margin: EdgeInsets.only(right: 300 , top : 20),
+                  child: Text("Deliver To" , style: TextStyle(fontWeight: FontWeight.bold
+                  , fontSize: 15),)),
+              SizedBox(height: 10,),
+              Card(
+                margin:EdgeInsets.only(right:20 , left:20),
+                child: TextFormField(
+                    decoration : const  InputDecoration(
+                      icon : Icon(  Icons.location_pin , size: 20,),
+                      hintText: "Alamat Rumah",
 
-              Text(Provider.of<PesanProvider>(context).total().toString())
+                    ),
+                   controller: alamatRumah,
+                ),
+              ),
+              SizedBox(height: 10,),
+              Container(
+                margin:EdgeInsets.only(right: 275),
+                child : Text(
+                  "Order Summary",
+                  style:TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 15
+
+                  )
+                )
+              ),
+
+              Card(
+                margin:EdgeInsets.only(right:10 , left:10),
+                child: Column(
+                  children: [
+                    ListView.builder(
+                        shrinkWrap: true,
+                        itemCount: Provider.of<PesanProvider>(context).food.length,
+                        itemBuilder: (context, index) {
+                          var food = bayar.food[index];
+                          return ListTile(
+                            leading : Image.memory(base64Decode(food.image)),
+                            title: Text(food.name),
+                            subtitle: Text(food.price.toString()),
+                          );
+                        }
+                        ),
+                    ListView.builder(
+                        shrinkWrap: true,
+                        itemCount: Provider.of<PesanProvider>(context).drink.length,
+                        itemBuilder: (context, index) {
+                          var drink = bayar.drink[index];
+                          return ListTile(
+                            leading : Image.memory(base64Decode(drink.image)),
+                            title: Text(drink.name),
+                            subtitle: Text(drink.price.toString()),
+                          );
+                        }),
+                  ],
+                ),
+              ),
+
+
             ],
           ),
         );
@@ -59,6 +98,7 @@ class _BayarPageState extends State<BayarPage> {
         onPressed: () {
           if (Provider.of<PesanProvider>(context, listen: false).food.length !=
               0) {
+
             showDialog(
                 context: context,
                 builder: (_) => AlertDialog(
@@ -69,30 +109,50 @@ class _BayarPageState extends State<BayarPage> {
                       child: SingleChildScrollView(
                         child: Column(
                           children: [
-                            Text("Alamat Rumah"),
-                            Text(alamatRumah.text),
+                            Container(
+                                margin: EdgeInsets.only(right: 175),
+                                child: Text("Alamat Rumah" , style: TextStyle(fontWeight: FontWeight.bold),)),
                             SizedBox(
-                              height: 5,
+                              height: 10,
                             ),
-                            Text("Daftar Pemesanan"),
-                            ListView.builder(
-                                shrinkWrap: true,
-                                itemCount: Provider.of<PesanProvider>(context,
-                                    listen: false)
-                                    .food
-                                    .length,
-                                itemBuilder: (context, index) {
-                                  var food = Provider.of<PesanProvider>(context)
-                                      .food[index];
-                                  return ListTile(
-                                    title: Text(food.name),
-                                    subtitle: Text(food.price.toString()),
-                                  );
-                                }),
+                            Container(
+                                margin: EdgeInsets.only(right: 200),
+                                child: Text(alamatRumah.text)),
+                            SizedBox(
+                              height: 20,
+                            ),
+                            Container(
+                                margin: EdgeInsets.only(right: 200),
+                                child: Text("Total Harga" , style: TextStyle(fontWeight: FontWeight.bold),)),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            Container(
+                                margin: EdgeInsets.only(right: 210),
+
+                                child: Text(Provider.of<PesanProvider>(context).total().toString()))
                           ],
                         ),
                       ),
-                    )));
+                    ),
+                  actions: [
+                InkWell(
+                child: Text("OK "),
+              onTap: () {
+                      final authProve = Provider.of<AuthProvider>(context , listen: false);
+                      final pesanProve = Provider.of<PesanProvider>(context , listen:false);
+                      Future<String> getID()async{
+                        return await authProve.getUserID();
+                      }
+                      Future<String> getShopID()async{
+                        return await pesanProve.getShopID();
+                      }
+                      int end = Provider.of<PesanProvider>(context , listen: false).total() ;
+                      Provider.of<PesanProvider>(context , listen:false).addPesanToServer(getID(), getShopID(), pesanProve.getFoodForPesan().toString(), end , pesanProve.getDrinkForPesan().toString());
+                }
+                )
+                  ],
+                ));
           }
         },
         label: const Text('Pesan'),
