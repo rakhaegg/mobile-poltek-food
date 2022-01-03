@@ -1,3 +1,4 @@
+// Model untuk buyer memesan
 // To parse this JSON data, do
 //
 //     final pesanForBuyer = pesanForBuyerFromJson(jsonString);

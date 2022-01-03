@@ -82,7 +82,7 @@ class _RegisterShopState extends State<RegisterShop> {
                                 controller: addressShopContoroller,
                                 validator: (String? value) {
                                   if (value!.isEmpty) {
-                                    return 'Masukkkan Alamt Toko';
+                                    return 'Masukkkan Alamat Toko';
                                   }
 
                                   return null;
@@ -102,7 +102,7 @@ class _RegisterShopState extends State<RegisterShop> {
                                 },
                                 onChanged: (text) => setState(() => errorMessage = ''),
                                 decoration: InputDecoration(
-                                  labelText: 'No Toko',
+                                  labelText: 'No HP Toko',
                                 ),
                               ),
                               SizedBox(height :20 ),
@@ -119,7 +119,7 @@ class _RegisterShopState extends State<RegisterShop> {
 
                                   ElevatedButton(
                                       onPressed: () => pickImage(),
-                                      child: Text("Pick a Gallery")
+                                      child: Text("Pilih Gallery")
                                   )
                                 ],
                               ),
@@ -158,7 +158,7 @@ class _RegisterShopState extends State<RegisterShop> {
 
 
    }on PlatformException catch(e){
-     print('Failed to pick Image $e');
+     print('Gagal Memilih Gambar $e');
    }
 
 
@@ -196,12 +196,3 @@ class _RegisterShopState extends State<RegisterShop> {
     }
     }
   }
-/*
-  Test Case
-  1. Jika nama toko telah ada maka tampil pesan Nama Toko Telah Ada
-  2. Jika salah satu field kosong maka harus diisi maka harus tampil pesan yang
-      sesuai
-  3.
-
-
- */

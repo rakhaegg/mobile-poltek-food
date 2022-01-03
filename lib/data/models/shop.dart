@@ -1,3 +1,4 @@
+// Model untuk data pembelian user
 // To parse this JSON data, do
 //
 //     final shop = shopFromJson(jsonString);

@@ -18,7 +18,6 @@ class _BayarPageState extends State<BayarPage> {
   TextEditingController alamatRumah = TextEditingController();
   @override
   void dispose() {
-    // TODO: implement dispose
     super.dispose();
     alamatRumah.dispose();
   }
@@ -33,7 +32,7 @@ class _BayarPageState extends State<BayarPage> {
             children: [
               Container(
                   margin: EdgeInsets.only(right: 300 , top : 20),
-                  child: Text("Deliver To" , style: TextStyle(fontWeight: FontWeight.bold
+                  child: Text("Kirim ke" , style: TextStyle(fontWeight: FontWeight.bold
                   , fontSize: 15),)),
               SizedBox(height: 10,),
               Card(
@@ -51,7 +50,7 @@ class _BayarPageState extends State<BayarPage> {
               Container(
                 margin:EdgeInsets.only(right: 275),
                 child : Text(
-                  "Order Summary",
+                  "Ringkasan Pemesanan",
                   style:TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 15

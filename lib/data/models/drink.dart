@@ -1,3 +1,4 @@
+// Model untuk minuman
 // To parse this JSON data, do
 //
 //     final drink = drinkFromJson(jsonString);

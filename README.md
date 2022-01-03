@@ -1,16 +1,10 @@
-# my_first_app
+# Pesen Makan Minum
 
-A new Flutter project.
+Pesen Makan Minum adalah aplikasi android yang berfungsi sebagai tempat pemesanan makanan atau minuman UMKM lokal atau jenis yang internasional.
 
-## Getting Started
+## Anggota Kami
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- AH MAULIDI RIFKI MD => NIM : 1941720197
+- IRSYADHA ALFYRDHOUSI REDHYSYAHPUTRA => NIM : 1941720041
+- RAKHA ELANG GUNAWAN => NIM : 1841720163
+- REYHAN SYAMSUDIN => NIM : 1941720210

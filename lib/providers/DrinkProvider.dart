@@ -7,6 +7,7 @@ import 'package:my_first_app/data/models/drink.dart';
 import 'package:my_first_app/providers/AuthProvider.dart';
 import 'package:my_first_app/data/api/seller_api.dart';
 
+// Provider untuk minuman
 class DrinkProvider extends ChangeNotifier {
 
   late SellerApiService apiService;

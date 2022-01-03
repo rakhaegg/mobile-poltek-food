@@ -8,6 +8,7 @@ import 'dart:convert';
 
 import 'ShopProvider.dart';
 
+// Provider untuk autentikasi 
 class AuthProvider extends ChangeNotifier {
 
   bool isAuthenticated = false;

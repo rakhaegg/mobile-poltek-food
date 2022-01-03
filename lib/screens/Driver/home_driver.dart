@@ -23,7 +23,7 @@ class _HomeDriverState extends State<HomeDriver> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Welcome to Flutter',
+      title: 'Selamat Datang!',
       home: Scaffold(
         body: widgetOptions.elementAt(selectedIndex),
         bottomNavigationBar: BottomAppBar(
