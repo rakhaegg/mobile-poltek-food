@@ -1,3 +1,4 @@
+// Model untuk token
 // To parse this JSON data, do
 //
 //     final user = userFromJson(jsonString);

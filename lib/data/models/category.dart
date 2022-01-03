@@ -1,3 +1,5 @@
+// Model untuk kategori
+
 class Category {
   int id;
   String name;

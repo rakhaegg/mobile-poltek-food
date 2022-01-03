@@ -1,3 +1,4 @@
+// Model untuk transaksi
 class Transaction {
   int id;
   int categoryId;

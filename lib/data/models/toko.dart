@@ -1,3 +1,4 @@
+// model untuk toko
 // To parse this JSON data, do
 //
 //     final toko = tokoFromMap(jsonString);
