@@ -8,6 +8,7 @@ import 'package:my_first_app/data/models/shop.dart';
 import 'package:my_first_app/providers/AuthProvider.dart';
 import 'dart:convert';
 
+// Provider untuk pembelian
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ShopProvider extends ChangeNotifier{
