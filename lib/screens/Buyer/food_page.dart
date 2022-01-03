@@ -207,18 +207,9 @@ class _DetailPageShopState extends State<DetailPageShop> {
                             else
                               return Text('Result: ${snapshot.data}');
                         }
-
-
-
                       }),
-
-
-
-
             ]  )
-
             ));
-
   }
   }
 
