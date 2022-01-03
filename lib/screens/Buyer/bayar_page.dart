@@ -1,8 +1,10 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:my_first_app/data/models/shop.dart';
 import 'package:my_first_app/providers/AuthProvider.dart';
 import 'package:my_first_app/providers/PesanProvider.dart';
+import 'package:my_first_app/providers/ShopProvider.dart';
 import 'package:provider/provider.dart';
 
 class BayarPage extends StatefulWidget {
@@ -140,14 +142,29 @@ class _BayarPageState extends State<BayarPage> {
               onTap: () {
                       final authProve = Provider.of<AuthProvider>(context , listen: false);
                       final pesanProve = Provider.of<PesanProvider>(context , listen:false);
+                      final shopProve = Provider.of<ShopProvider>(context , listen:false);
                       Future<String> getID()async{
                         return await authProve.getUserID();
                       }
                       Future<String> getShopID()async{
                         return await pesanProve.getShopID();
                       }
+                      Future<String> getNameShopById() async{
+                        Shop shop = await shopProve.getNameShopById(await getShopID());
+
+                        return shop.data.user[0].name;
+                      }
+                      Future<String> getAlamat() async{
+                        Shop shop = await shopProve.getNameShopById(await getShopID());
+
+                        return shop.data.user[0].address;
+                      }
                       int end = Provider.of<PesanProvider>(context , listen: false).total() ;
-                      Provider.of<PesanProvider>(context , listen:false).addPesanToServer(getID(), getShopID(), pesanProve.getFoodForPesan().toString(), end , pesanProve.getDrinkForPesan().toString());
+                      Provider.of<PesanProvider>(context , listen:false)
+                          .addPesanToServer(getID(), getShopID(), pesanProve.getFoodForPesan().toString()
+                          , end , pesanProve.getDrinkForPesan().toString() , getNameShopById()
+                      , alamatRumah.text, getAlamat()
+                      );
                 }
                 )
                   ],

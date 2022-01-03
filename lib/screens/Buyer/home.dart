@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_first_app/providers/AuthProvider.dart';
+import 'package:my_first_app/providers/PesanProvider.dart';
 import 'package:my_first_app/providers/ShopProvider.dart';
 import 'package:my_first_app/screens/Buyer/riwayat_page.dart';
 import 'package:my_first_app/screens/Seller/CreatePage.dart';
@@ -68,9 +69,10 @@ class _HomeBuyerState extends State<HomeBuyer> {
       Provider.of<AuthProvider>(context, listen: false);
 
       final ShopProvider shop = Provider.of<ShopProvider>(context , listen: false);
+      final PesanProvider pesan = Provider.of<PesanProvider>(context , listen:false);
       await shop.logOut();
       await provider.logOut();
-
+      await pesan.logOut();
     } else {
       setState(() {
         selectedIndex = index;

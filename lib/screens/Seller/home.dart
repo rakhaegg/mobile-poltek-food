@@ -5,6 +5,8 @@ import 'package:my_first_app/screens/Seller/CreatePage.dart';
 import 'package:my_first_app/screens/Seller/home_page.dart';
 import 'package:provider/provider.dart';
 
+import 'daftar_pesan.dart';
+
 class HomeSeller extends StatefulWidget {
   @override
   _HomeSellerState createState() => _HomeSellerState();
@@ -15,7 +17,7 @@ class _HomeSellerState extends State<HomeSeller> {
   List<Widget> widgetOptions = [
     HomePage(),
     CreatePage(),
-    //Categories(),
+    DaftarPesan(),
   ];
 
   @override
@@ -34,17 +36,23 @@ class _HomeSellerState extends State<HomeSeller> {
             BottomNavigationBarItem(
             icon: Icon(Icons.home),
             label: 'Home',
-            backgroundColor: Colors.red,
+            backgroundColor: Colors.blue,
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.create),
             label: 'Create',
-            backgroundColor: Colors.red,
+            backgroundColor: Colors.blue,
           ),
-          BottomNavigationBarItem(
+              BottomNavigationBarItem(
+                icon: Icon(Icons.list),
+                label: 'List',
+                backgroundColor: Colors.blue,
+              ),
+
+              BottomNavigationBarItem(
             icon: Icon(Icons.logout),
             label: 'Exit',
-            backgroundColor: Colors.pink,
+            backgroundColor: Colors.blue,
           )],
             currentIndex: selectedIndex,
             onTap: onItemTapped,
@@ -55,7 +63,7 @@ class _HomeSellerState extends State<HomeSeller> {
   }
 
   Future<void> onItemTapped(int index) async {
-    if (index == 2) {
+    if (index == 3) {
       print("EXIT");
       final AuthProvider provider = Provider.of<AuthProvider>(context, listen: false);
 

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_first_app/data/models/pesanForBuyer.dart';
+import 'package:my_first_app/data/models/shop.dart';
 import 'package:my_first_app/providers/AuthProvider.dart';
 import 'package:my_first_app/providers/PesanProvider.dart';
 import 'package:provider/provider.dart';
@@ -26,6 +27,7 @@ class _RiwayatPageState extends State<RiwayatPage> {
       return list;
     }
 
+
     return Scaffold(
       appBar: AppBar(
         title: const Text("Riwayat Pesanan"),
@@ -48,7 +50,60 @@ class _RiwayatPageState extends State<RiwayatPage> {
                             itemBuilder: (context, index) {
                               return ListTile(
                                   title: Text(snapshot.data?.data.user[index].id
-                                      as String));
+                                      as String),
+                                subtitle:Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+
+                                    Text(snapshot.data?.data.user[index].namaToko
+                                    as String),
+
+                                    Container(
+                                        child: snapshot.data?.data.user[index].statusBuyer
+                                        as String == ""  ?
+                                            snapshot.data?.data.user[index].driverId
+                                    as String == ""  ?  Text("Menunggu Driver") : Text('Driver menuju Lokasi')
+                                            : Text("Selesai")
+                                    ),
+
+                                    Container(
+                                      child:  snapshot.data?.data.user[index].statusBuyer
+                                      as String == ""  ?
+                                          snapshot.data?.data.user[index].statusShop
+                                          as String == ""  ?  Text("Toko Menungggu Driver") :
+                                          snapshot.data?.data.user[index].statusShop
+                                          as String == "Sedang Memasak" ?
+                                          Text('Sedang Memasak') : Text("Makakan Dibawa Driver")
+
+                                          :Text("Selesai")
+                                      ),
+
+                                    Container(
+                                      child:
+                                          snapshot.data?.data.user[index].statusBuyer
+                                          as String == ""  ?
+                                          TextButton(
+                                              style: TextButton.styleFrom(
+                                                primary: Colors.red,
+                                              ),
+                                              onPressed: () {
+                                                setState(() {
+
+                                                  Provider.of<PesanProvider>(context , listen: false).updateDataBuyer(snapshot.data?.data.user[index].id as String
+
+                                                    , "Terima");
+                                                });
+
+                                              }, child: Text("Terima")
+
+                                      )
+                                              : Text("Selesai")
+                                    )
+
+                                  ],
+                                )
+
+                              );
                             });
                       } else if (snapshot.hasError) {
                         print(snapshot.toString());

@@ -362,4 +362,91 @@ Future<String> getShop(String id , String token) async {
 
 
   }
+  Future<String> getDafterPesan(String shopId) async {
+    String uri = baseUrl + 'order/seller/$shopId';
+
+    http.Response response = await http.get(Uri.parse(uri),
+        headers: {
+          HttpHeaders.contentTypeHeader: 'application/json',
+          HttpHeaders.authorizationHeader :"Bearer $token"
+        },
+
+        );
+
+
+    if (response.statusCode == 422) {
+      Map<String, dynamic> body = jsonDecode(response.body);
+      Map<String, dynamic> errors = body['errors'];
+      String errorMessage = '';
+      errors.forEach((key, value) {
+        value.forEach((element) {
+          errorMessage += element + '\n';
+        });
+      });
+      throw Exception(errorMessage);
+    }
+    // return token
+    return response.body;
+
+
+  }
+  Future<String> getName(String shopId) async {
+    String uri = baseUrl + 'buyer/$shopId';
+
+    http.Response response = await http.get(Uri.parse(uri),
+      headers: {
+        HttpHeaders.contentTypeHeader: 'application/json',
+        HttpHeaders.authorizationHeader :"Bearer $token"
+      },
+
+    );
+
+
+    if (response.statusCode == 422) {
+      Map<String, dynamic> body = jsonDecode(response.body);
+      Map<String, dynamic> errors = body['errors'];
+      String errorMessage = '';
+      errors.forEach((key, value) {
+        value.forEach((element) {
+          errorMessage += element + '\n';
+        });
+      });
+      throw Exception(errorMessage);
+    }
+    // return token
+    return response.body;
+
+
+  }
+  Future<String> updateMessage(String id , String message) async {
+    String uri = baseUrl + 'seller/orders/$id';
+
+    http.Response response = await http.put(Uri.parse(uri),
+      headers: {
+        HttpHeaders.contentTypeHeader: 'application/json',
+        HttpHeaders.authorizationHeader :"Bearer $token"
+      },
+      body: jsonEncode({
+        "data" : message
+      })
+
+    );
+
+
+    if (response.statusCode == 422) {
+      Map<String, dynamic> body = jsonDecode(response.body);
+      Map<String, dynamic> errors = body['errors'];
+      String errorMessage = '';
+      errors.forEach((key, value) {
+        value.forEach((element) {
+          errorMessage += element + '\n';
+        });
+      });
+      throw Exception(errorMessage);
+    }
+    // return token
+    return response.body;
+
+
+  }
 }

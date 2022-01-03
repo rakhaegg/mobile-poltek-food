@@ -57,8 +57,16 @@ class ShopProvider extends ChangeNotifier{
     final jsonResponse = json.decode(text);
     return new Shop.fromJson(jsonResponse);
 
+  }
+  Future<Shop> getNameShopById(String shopID )async{
+    String  shop = await apiBuyerService.getShopIDForRiwayatPesan(shopID);
+    final jsonResponse = json.decode(shop);
+    return new Shop.fromJson(jsonResponse);
+
+
 
   }
+
   Future<Shop> getAllShop()async{
 
     //print(await authProvider.getShopID());
