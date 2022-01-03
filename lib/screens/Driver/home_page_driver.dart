@@ -111,7 +111,6 @@ class _FoodPageState extends State<FoodPage> {
 
   @override
   void dispose() {
-    // TODO: implement dispose
     super.dispose();
     nameEditingController.dispose();
     priceEditingController.dispose();
@@ -335,7 +334,6 @@ class _DrinkPageState extends State<DrinkPage> {
   final TextEditingController priceEditingController = TextEditingController();
   @override
   void dispose() {
-    // TODO: implement dispose
     super.dispose();
     nameEditingController.dispose();
     priceEditingController.dispose();

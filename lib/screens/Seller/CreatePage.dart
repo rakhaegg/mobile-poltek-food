@@ -28,7 +28,6 @@ class _CreatePageState extends State<CreatePage> {
   String errorMessage = "";
   @override
   void dispose() {
-    // TODO: implement dispose
     super.dispose();
     nameController.dispose();
     priceController.dispose();

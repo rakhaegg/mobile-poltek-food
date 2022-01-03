@@ -29,7 +29,6 @@ class _RegisterState extends State<Register> {
   }
   @override
   void dispose() {
-    // TODO: implement dispose
     super.dispose();
     usernameController.dispose();
     passwordController.dispose();
