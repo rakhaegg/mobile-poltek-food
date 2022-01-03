@@ -113,14 +113,14 @@ class _ListPesanState extends State<ListPesan> {
 
                               ElevatedButton(
                                   onPressed: () => pickImage(),
-                                  child: Text("Pick a Gallery")
+                                  child: Text("Pilih Gallery")
                               )
                             ],
                           ),
 
                           ElevatedButton(
                             onPressed: () => submit(dropdownValue),
-                            child: Text("Create Data"),
+                            child: Text("Buat Data"),
                             style: ElevatedButton.styleFrom(
                                 minimumSize: Size(double.infinity, 36)),
                           )
@@ -149,7 +149,7 @@ class _ListPesanState extends State<ListPesan> {
 
 
     }on PlatformException catch(e){
-      print('Failed to pick Image $e');
+      print('Gagal Memilih Gambar $e');
     }
 
 
