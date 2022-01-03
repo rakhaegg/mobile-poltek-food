@@ -467,14 +467,3 @@ class _DrinkPageState extends State<DrinkPage> {
   }
 }
 
-/*
-  Test Case
-  1. Jika Toko belum mempunyai Makanan maka menampilkan pesan
-  2. Jika Toko belum mempunyai Minuman maka menampilkan pesan
-
-  Test Case Update Data
-  1. Jika Salah satu field atau keduanya kosong maka keluar pesan
-  2.
-
-
- */

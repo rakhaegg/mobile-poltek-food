@@ -37,7 +37,7 @@ class _CreatePageState extends State<CreatePage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text("Create Page"),
+          title: Text("Halaman Create"),
         ),
         body: Column(
           children: [
@@ -113,14 +113,14 @@ class _CreatePageState extends State<CreatePage> {
 
                               ElevatedButton(
                                   onPressed: () => pickImage(),
-                                  child: Text("Pick a Gallery")
+                                  child: Text("Pilih Gallery")
                               )
                             ],
                           ),
 
                           ElevatedButton(
                             onPressed: () => submit(dropdownValue),
-                            child: Text("Create Data"),
+                            child: Text("Buat Data"),
                             style: ElevatedButton.styleFrom(
                                 minimumSize: Size(double.infinity, 36)),
                           )
@@ -149,7 +149,7 @@ class _CreatePageState extends State<CreatePage> {
 
 
     }on PlatformException catch(e){
-      print('Failed to pick Image $e');
+      print('Gagal memilih gambar $e');
     }
 
 
