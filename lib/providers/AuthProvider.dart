@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:my_first_app/data/api/buyer_api.dart';
 import 'package:my_first_app/data/api/driver_api.dart';
 import 'package:my_first_app/data/api/seller_api.dart';
+import 'package:my_first_app/data/models/buyer.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
 
@@ -68,7 +69,7 @@ class AuthProvider extends ChangeNotifier {
       setUserID(userID["data"]["id"]);
       setToken(userID["data"]["accessToken"]);
       setType("Driver");
-
+      this.type = "Driver";
       notifyListeners();
     }else if(type =="Seller"){
       Map userID = json.decode( await apiSellerService.login(email , password , deviceName)) as Map;
@@ -136,12 +137,19 @@ class AuthProvider extends ChangeNotifier {
     final prefs = await SharedPreferences.getInstance();
     return prefs.getString('type') ?? '';
   }
-  
+
 
   Future<String> getToken() async {
     final prefs = await SharedPreferences.getInstance();
     return prefs.getString('token') ?? '';
   }
 
-  
+  Future<Buyer> getName(String id) async {
+    print(id);
+    String buyer = await apiSellerService.getName(id);
+    final jsonResponse = json.decode(buyer);
+
+    return Buyer.fromJson(jsonResponse);
+
+  }
 }

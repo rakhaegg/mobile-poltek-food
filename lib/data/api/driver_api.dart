@@ -174,22 +174,15 @@ class DriverApiService {
     // return token
     return response.body;
   }
-  Future<String> addFood(String name , int price , String image ,String id , String token) async {
-    String uri = baseUrl + 'shops/food/$id';
+  Future<String> getOrder() async {
+    String uri = baseUrl + 'drivers/orders';
 
-    http.Response response = await http.post(Uri.parse(uri),
-        headers: {
-          HttpHeaders.contentTypeHeader: 'application/json',
-          HttpHeaders.authorizationHeader :"Bearer $token"
-        },
-
-        body: jsonEncode({
-          'name': name,
-          'price': price,
-          'image' : image
-
-        }));
-
+    http.Response response = await http.get(Uri.parse(uri),
+      headers: {
+        HttpHeaders.contentTypeHeader: 'application/json',
+        HttpHeaders.authorizationHeader :"Bearer $token"
+      },
+    );
 
     if (response.statusCode == 422) {
       Map<String, dynamic> body = jsonDecode(response.body);
@@ -205,147 +198,18 @@ class DriverApiService {
     // return token
     return response.body;
   }
-  Future<String> addDrink(String name , int price , String image , String id , String token) async {
-    String uri = baseUrl + 'shops/drink/$id';
-
-    http.Response response = await http.post(Uri.parse(uri),
-        headers: {
-          HttpHeaders.contentTypeHeader: 'application/json',
-          HttpHeaders.authorizationHeader :"Bearer $token"
-        },
-
-        body: jsonEncode({
-          'name': name,
-          'price': price,
-          'image' : image
-
-        }));
-
-
-    if (response.statusCode == 422) {
-      Map<String, dynamic> body = jsonDecode(response.body);
-      Map<String, dynamic> errors = body['errors'];
-      String errorMessage = '';
-      errors.forEach((key, value) {
-        value.forEach((element) {
-          errorMessage += element + '\n';
-        });
-      });
-      throw Exception(errorMessage);
-    }
-    print(response.body);
-    // return token
-    return response.body;
-  }
-  Future<String> deleteFood(String idFood , String idShop ,  String token) async {
-    String uri = baseUrl + 'shops/food/$idFood';
-
-    http.Response response = await http.delete(Uri.parse(uri),
-        headers: {
-          HttpHeaders.contentTypeHeader: 'application/json',
-          HttpHeaders.authorizationHeader :"Bearer $token"
-        },
-
-        body: jsonEncode({
-          'id_shop': idShop,
-
-
-        }));
-
-
-    if (response.statusCode == 422) {
-      Map<String, dynamic> body = jsonDecode(response.body);
-      Map<String, dynamic> errors = body['errors'];
-      String errorMessage = '';
-      errors.forEach((key, value) {
-        value.forEach((element) {
-          errorMessage += element + '\n';
-        });
-      });
-      throw Exception(errorMessage);
-    }
-    print(response.body);
-    // return token
-    return response.body;
-  }
-  Future<String> deleteDrink(String idDrink , String idShop ,  String token) async {
-    String uri = baseUrl + 'shops/drink/$idDrink';
-
-    http.Response response = await http.delete(Uri.parse(uri),
-        headers: {
-          HttpHeaders.contentTypeHeader: 'application/json',
-          HttpHeaders.authorizationHeader :"Bearer $token"
-        },
-
-        body: jsonEncode({
-          'id_shop': idShop,
-
-        }));
-
-
-    if (response.statusCode == 422) {
-      Map<String, dynamic> body = jsonDecode(response.body);
-      Map<String, dynamic> errors = body['errors'];
-      String errorMessage = '';
-      errors.forEach((key, value) {
-        value.forEach((element) {
-          errorMessage += element + '\n';
-        });
-      });
-      throw Exception(errorMessage);
-    }
-    print(response.body);
-    // return token
-    return response.body;
-  }
-  Future<String> updateDrink(String name , int price , String idDrink, String idShop  ,  String token) async {
-    String uri = baseUrl + 'shops/drink/$idDrink';
-    print(name);
-    http.Response response = await http.put(Uri.parse(uri),
-        headers: {
-          HttpHeaders.contentTypeHeader: 'application/json',
-          HttpHeaders.authorizationHeader :"Bearer $token"
-        },
-
-        body: jsonEncode({
-          "id_shop" : idShop,
-          "name" : name,
-          "price" : price,
-
-        }));
-
-
-    if (response.statusCode == 422) {
-      Map<String, dynamic> body = jsonDecode(response.body);
-      Map<String, dynamic> errors = body['errors'];
-      String errorMessage = '';
-      errors.forEach((key, value) {
-        value.forEach((element) {
-          errorMessage += element + '\n';
-        });
-      });
-      throw Exception(errorMessage);
-    }
-    // return token
-    return response.body;
-  }
-  Future<String> updateFood(String name , int price , String idFood,String image , String idShop  ,  String token) async {
-    String uri = baseUrl + 'shops/food/$idFood';
+  Future<String> updateOrdersDriver(String id_Driver , String id_order) async {
+    String uri = baseUrl + 'drivers/orders/$id_order';
 
     http.Response response = await http.put(Uri.parse(uri),
-        headers: {
-          HttpHeaders.contentTypeHeader: 'application/json',
-          HttpHeaders.authorizationHeader :"Bearer $token"
-        },
-
-        body: jsonEncode({
-          "id_shop" : idShop,
-          "name" : name,
-          "price" : price,
-          "image" :image
-
-        }));
-
+      headers: {
+        HttpHeaders.contentTypeHeader: 'application/json',
+        HttpHeaders.authorizationHeader :"Bearer $token"
+      },
+      body: jsonEncode({
+        "id_driver" : id_Driver
+      })
+    );
 
     if (response.statusCode == 422) {
       Map<String, dynamic> body = jsonDecode(response.body);
@@ -358,10 +222,8 @@ class DriverApiService {
       });
       throw Exception(errorMessage);
     }
-    print(response.body);
     // return token
     return response.body;
-
-
   }
+
 }
