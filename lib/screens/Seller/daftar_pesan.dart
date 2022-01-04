@@ -122,7 +122,7 @@ class _DaftarPesanState extends State<DaftarPesan> {
                                                       snapshot.data?.data.user[index].id as String, "Diterima");
                                                 });
 
-                                              }, child: Text("Siapkan Masakan "),
+                                              }, child: Text("Terima"),
                                             ) : snapshot.data?.data.user[index].statusShop == "Sudah diantar toko" ?
 
                                                 Text("Selesai") :

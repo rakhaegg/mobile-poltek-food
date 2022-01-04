@@ -49,9 +49,10 @@ class DrinkProvider extends ChangeNotifier {
 
     notifyListeners();
   }
-Future<void> updateDrink(String name ,String idDrink ,  int price , Future<String> idShop  , Future<String> token ) async{
+Future<void> updateDrink(String name ,String idFood ,  int price ,String image , Future<String> idShop  , Future<String> token ) async{
 
-    await apiService.updateDrink(name , price ,idDrink , await idShop, await token);
+    await apiService.updateDrink(name , price ,idFood , image , await idShop, await token);
+
 
     notifyListeners();
   }

@@ -474,7 +474,7 @@ class BuyerApiService {
   }
 
   Future<String> getShopIDForRiwayatPesan(String shopID) async{
-    String uri = baseUrl + 'buyer/shops/$shopID';
+    String uri = baseUrl + 'order/shops/$shopID';
 
     http.Response response = await http.get(Uri.parse(uri),
       headers: {
@@ -500,7 +500,7 @@ class BuyerApiService {
   }
 
   Future<String> updateData(String id , String text ) async{
-    String uri = baseUrl + 'buyer/orders/$id';
+    String uri = baseUrl + 'order/buyer/$id';
 
     http.Response response = await http.put(Uri.parse(uri),
       headers: {

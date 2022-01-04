@@ -12,7 +12,6 @@ class SellerApiService {
   }
 
   final String baseUrl = "http://10.0.2.2:5000/";
-
   
 
   Future<String> fetchFood(String userID , String token) async{
@@ -298,8 +297,8 @@ Future<String> getShop(String id , String token) async {
     // return token
     return response.body;
   }
-  Future<String> updateDrink(String name , int price , String idDrink, String idShop  ,  String token) async {
-    String uri = baseUrl + 'seller/shops/drink/$idDrink';
+  Future<String> updateDrink(String name , int price , String idFood,String image , String idShop  ,  String token) async {
+    String uri = baseUrl + 'seller/shops/drink/$idFood';
     http.Response response = await http.put(Uri.parse(uri),
         headers: {
           HttpHeaders.contentTypeHeader: 'application/json',
@@ -310,6 +309,7 @@ Future<String> getShop(String id , String token) async {
           "id_shop" : idShop,
           "name" : name,
           "price" : price,
+          "image" :image
           
         }));
     
@@ -419,7 +419,7 @@ Future<String> getShop(String id , String token) async {
 
   }
   Future<String> updateMessage(String id , String message) async {
-    String uri = baseUrl + 'seller/orders/$id';
+    String uri = baseUrl + 'order/seller/$id';
 
     http.Response response = await http.put(Uri.parse(uri),
       headers: {

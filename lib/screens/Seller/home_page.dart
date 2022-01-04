@@ -342,8 +342,14 @@ class DrinkPage extends StatefulWidget {
 }
 
 class _DrinkPageState extends State<DrinkPage> {
+
+
   final TextEditingController nameEditingController = TextEditingController();
   final TextEditingController priceEditingController = TextEditingController();
+  late  String name = "";
+  late  int price = 0;
+  Io.File? image;
+
   @override
   void dispose() {
     super.dispose();
@@ -393,64 +399,156 @@ class _DrinkPageState extends State<DrinkPage> {
                             onPressed: () {
                               showDialog(
                                   context: context,
-                                  builder: (context) {
-                                    return AlertDialog(
-                                      content: Form(
-                                        key: _formKey,
-                                        child: Column(
-                                          mainAxisSize: MainAxisSize.min,
-                                          children: <Widget>[
-                                            TextFormField(
-                                              controller: nameEditingController,
-                                              keyboardType: TextInputType.text,
-                                              validator: (value) {
-                                                return value!.isNotEmpty
-                                                    ? null
-                                                    : "Isi Nama Minuman";
-                                              },
-                                              decoration: InputDecoration(
-                                                  hintText: "Nama Minuman "),
-                                            ),
-                                            TextFormField(
-                                              controller:
-                                                  priceEditingController,
-                                              keyboardType:
-                                                  TextInputType.number,
-                                              validator: (value) {
-                                                return value!.isNotEmpty
-                                                    ? null
-                                                    : "Isi Harga Minuman";
-                                              },
-                                              decoration: InputDecoration(
-                                                  hintText: "Nama Minuman"),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                      title: Text("Update Data"),
-                                      actions: <Widget>[
-                                        InkWell(
-                                          child: Text("OK "),
-                                          onTap: () {
-                                            if (_formKey.currentState!
-                                                .validate()) {
-                                              drinkProvider.updateDrink(
-                                                  nameEditingController.text,
-                                                  snapshot
-                                                      .data
-                                                      ?.data
-                                                      .drink[index]
-                                                      .id as String,
-                                                  int.parse(
-                                                      priceEditingController
-                                                          .text),
-                                                  shopID.getShopID(),
-                                                  widget.token);
+                                  builder: (BuildContext context) {
+                                    return StatefulBuilder(
+                                        builder: (context,setState) {
+
+                                          Future pickImage() async {
+                                            try {
+                                              final image = await ImagePicker()
+                                                  .pickImage(
+                                                  source: ImageSource.gallery);
+
+
+                                              if (image == null) return;
+
+                                              final imageTemporary = Io.File(
+                                                  image.path);
+                                              setState(() {
+                                                this.image = imageTemporary;
+                                              });
+                                            } on PlatformException catch (e) {
+                                              print('Failed to pick Image $e');
                                             }
-                                          },
-                                        )
-                                      ],
-                                    );
+                                          }
+
+
+                                          return AlertDialog(
+                                            content: Form(
+                                              key: _formKey,
+                                              child: Column(
+                                                mainAxisSize: MainAxisSize.min,
+                                                children: <Widget>[
+
+                                                  TextFormField(
+                                                    initialValue: snapshot.data
+                                                        ?.data
+                                                        .drink[index].name as String,
+                                                    keyboardType: TextInputType
+                                                        .text,
+                                                    validator: (value) {
+                                                      return value!.isNotEmpty
+                                                          ? null
+                                                          : "Isi Nama Makanan";
+                                                    },
+                                                    onChanged: (s) {
+                                                      setState(() {
+                                                        this.name = s;
+                                                        print(name);
+                                                      });
+
+                                                    },
+                                                    decoration: InputDecoration(
+                                                        hintText: "Nama Makanan "),
+                                                  ),
+                                                  TextFormField(
+                                                    initialValue: snapshot.data
+                                                        ?.data
+                                                        .drink[index].price
+                                                        .toString(),
+                                                    keyboardType:
+                                                    TextInputType.number,
+                                                    validator: (value) {
+                                                      return value!.isNotEmpty
+                                                          ? null
+                                                          : "Isi Harga Makanan";
+                                                    },
+                                                    onChanged: (s) {
+
+                                                      setState(() {
+                                                        this.price = int.parse(s);
+                                                        print(price);
+                                                      });
+                                                    },
+                                                    decoration: InputDecoration(
+                                                        hintText: "Nama Minuman"),
+                                                  ),
+                                                  SizedBox(height: 20),
+                                                  Row(
+                                                    children: <Widget>[
+                                                      image != null ? Image.file(
+                                                        this.image!,
+                                                        width: 125,
+                                                        height: 150,
+                                                        fit: BoxFit.cover,
+                                                      ) : Image.memory(base64Decode(
+                                                          snapshot.data?.data
+                                                              .drink[index]
+                                                              .image as String),
+
+                                                        width: 125,
+                                                        height: 150,),
+                                                      SizedBox(width: 20),
+
+                                                      ElevatedButton(
+                                                          onPressed: () =>
+                                                              pickImage(),
+                                                          child: Text(
+                                                              "Pick a Gallery")
+                                                      )
+                                                    ],
+                                                  )
+                                                ],
+                                              ),
+                                            ),
+                                            title: Text("Update Data"),
+                                            actions: <Widget>[
+                                              InkWell(
+                                                child: Text("OK "),
+                                                onTap: () {
+                                                  if (_formKey.currentState!
+                                                      .validate()) {
+                                                    String img64 = "";
+                                                    Uint8List? imageBytes = this
+                                                        .image?.readAsBytesSync();
+                                                    if (image == null) {
+                                                      Uint8List? imageBytes = this
+                                                          .image?.readAsBytesSync();
+                                                      img64 =
+                                                      snapshot.data?.data
+                                                          .drink[index]
+                                                          .image as String;
+                                                    } else {
+                                                      img64 = base64Encode(
+                                                          imageBytes!);
+                                                    }
+                                                    if(this.name == ""){
+                                                      name = snapshot.data?.data
+                                                          .drink[index]
+                                                          .name as String;
+                                                    }
+                                                    if(this.price == 0){
+                                                      price = snapshot.data?.data
+                                                          .drink[index]
+                                                          .price as int ;
+                                                    }
+
+                                                    drinkProvider.updateDrink(
+                                                        name,
+                                                        snapshot.data?.data
+                                                            .drink[index]
+                                                            .id as String,
+                                                        price,
+                                                        img64,
+                                                        shopID.getShopID(),
+                                                        widget.token);
+
+                                                  }
+                                                },
+                                              )
+                                            ],
+                                          );
+                                        });
                                   });
                             },
                             icon: Icon(Icons.update)),

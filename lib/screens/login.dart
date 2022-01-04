@@ -26,7 +26,7 @@ class _LoginState extends State<Login> {
   @override
   void initState() {
     super.initState();
-    getDeviceName();
+
   }
   @override
   void dispose() {
@@ -153,7 +153,7 @@ class _LoginState extends State<Login> {
         await provider.login(
             emailController.text,
             passwordController.text,
-            deviceName,
+            "Android",
             "Driver"
         );
 
@@ -161,7 +161,7 @@ class _LoginState extends State<Login> {
         await provider.login(
             emailController.text,
             passwordController.text,
-            deviceName,
+            "Android",
             "Seller"
         );
         //final number = await shopProvider.checkShop(await provider.getUserID());
@@ -170,7 +170,7 @@ class _LoginState extends State<Login> {
         await provider.login(
             emailController.text,
             passwordController.text,
-            deviceName,
+            "Android",
             "Buyer"
         );
 
@@ -183,7 +183,7 @@ class _LoginState extends State<Login> {
       });
     }
   }
-
+  /*
   Future<void> getDeviceName() async {
     final DeviceInfoPlugin deviceInfoPlugin = DeviceInfoPlugin();
 
@@ -205,11 +205,6 @@ class _LoginState extends State<Login> {
       });
     }
   }
+
+   */
 }
-/*
-  Test Case
-  1. Jika user belum terdaftar maka tampil pesan
-  2. Jika dipassword yang diberikan salah maka tampil sebuah pesan
-  3. Jika username belum terisi maka tampil pesan
-  4. Jika password belum terisi maka tampil pesan
- */

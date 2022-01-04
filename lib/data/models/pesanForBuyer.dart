@@ -1,4 +1,3 @@
-// Model untuk buyer memesan
 // To parse this JSON data, do
 //
 //     final pesanForBuyer = pesanForBuyerFromJson(jsonString);
@@ -12,7 +11,7 @@ String pesanForBuyerToJson(PesanForBuyer data) => json.encode(data.toJson());
 class PesanForBuyer {
   PesanForBuyer({
     required this.status,
-    required this.data,
+    required   this.data,
   });
 
   String status;
@@ -31,7 +30,7 @@ class PesanForBuyer {
 
 class Data {
   Data({
-    required this.user,
+    required  this.user,
   });
 
   List<User> user;
@@ -47,43 +46,46 @@ class Data {
 
 class User {
   User({
-    required this.id,
-    required this.buyerId,
+    required  this.id,
+    required  this.buyerId,
     required this.shopId,
     required  this.driverId,
-    required this.namaToko,
     required this.statusShop,
+    required this.statusDriver,
     required  this.statusBuyer,
+    required  this.daftar,
+    required  this.total,
+    required this.namaToko,
     required this.alamatBuyer,
     required this.alamatToko,
-    required  this.daftar,
-    required this.daftarDrink,
   });
 
   String id;
   String buyerId;
   String shopId;
   String driverId;
-  String namaToko;
   String statusShop;
+  String statusDriver;
   String statusBuyer;
+  String daftar;
+  int total;
+  String namaToko;
   String alamatBuyer;
   String alamatToko;
-  String daftar;
-  String daftarDrink;
 
   factory User.fromJson(Map<String, dynamic> json) => User(
     id: json["id"],
     buyerId: json["buyer_id"],
     shopId: json["shop_id"],
     driverId: json["driver_id"],
-    namaToko: json["nama_toko"],
     statusShop: json["status_shop"],
+    statusDriver: json["status_driver"],
     statusBuyer: json["status_buyer"],
+    daftar: json["daftar"],
+    total: json["total"],
+    namaToko: json["nama_toko"],
     alamatBuyer: json["alamat_buyer"],
     alamatToko: json["alamat_toko"],
-    daftar: json["daftar"],
-    daftarDrink: json["daftar_drink"],
   );
 
   Map<String, dynamic> toJson() => {
@@ -91,12 +93,13 @@ class User {
     "buyer_id": buyerId,
     "shop_id": shopId,
     "driver_id": driverId,
-    "nama_toko": namaToko,
     "status_shop": statusShop,
+    "status_driver": statusDriver,
     "status_buyer": statusBuyer,
+    "daftar": daftar,
+    "total": total,
+    "nama_toko": namaToko,
     "alamat_buyer": alamatBuyer,
     "alamat_toko": alamatToko,
-    "daftar": daftar,
-    "daftar_drink": daftarDrink,
   };
 }

@@ -15,7 +15,6 @@ class HomeDriver extends StatefulWidget {
 class _HomeDriverState extends State<HomeDriver> {
   int selectedIndex = 0;
   List<Widget> widgetOptions = [
-    HomePageDriver(),
     ListPesan(),
     //Categories(),
   ];
@@ -39,11 +38,6 @@ class _HomeDriverState extends State<HomeDriver> {
                 backgroundColor: Colors.red,
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.create),
-                label: 'Create',
-                backgroundColor: Colors.red,
-              ),
-              BottomNavigationBarItem(
                 icon: Icon(Icons.logout),
                 label: 'Exit',
                 backgroundColor: Colors.pink,
@@ -57,7 +51,7 @@ class _HomeDriverState extends State<HomeDriver> {
   }
 
   Future<void> onItemTapped(int index) async {
-    if (index == 2) {
+    if (index == 1) {
       final AuthProvider provider =
       Provider.of<AuthProvider>(context, listen: false);
 

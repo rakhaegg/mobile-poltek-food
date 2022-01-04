@@ -92,6 +92,7 @@ class PesanProvider extends ChangeNotifier {
 
   }
   Future<void> updateDataBuyer(String id , String text) async{
+    print(id);
     await apiBuyerService.updateData(id , text);
 
 

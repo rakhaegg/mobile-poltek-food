@@ -35,7 +35,6 @@ dependencies:
   intl: ^0.17.0
   flutter_platform_widgets: ^1.11.1
   flutter_local_notifications: ^9.1.4
-  android_alarm_manager: ^2.0.2
   rxdart: ^0.27.3
   google_fonts: ^2.1.0
   sqflite: ^2.0.0+4

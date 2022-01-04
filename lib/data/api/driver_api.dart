@@ -14,7 +14,6 @@ class DriverApiService {
   final String baseUrl = "http://10.0.2.2:5000/";
 
 
-
   Future<String> fetchFood(String userID , String token) async{
     http.Response response = await http.get(
       Uri.parse(baseUrl + 'shops/food/$userID'),
@@ -175,7 +174,7 @@ class DriverApiService {
     return response.body;
   }
   Future<String> getOrder() async {
-    String uri = baseUrl + 'drivers/orders';
+    String uri = baseUrl + 'order/drivers';
 
     http.Response response = await http.get(Uri.parse(uri),
       headers: {
@@ -199,7 +198,7 @@ class DriverApiService {
     return response.body;
   }
   Future<String> updateOrdersDriver(String id_Driver , String id_order) async {
-    String uri = baseUrl + 'drivers/orders/$id_order';
+    String uri = baseUrl + 'order/drivers/$id_order';
 
     http.Response response = await http.put(Uri.parse(uri),
       headers: {
@@ -223,6 +222,7 @@ class DriverApiService {
       throw Exception(errorMessage);
     }
     // return token
+    print(response.body);
     return response.body;
   }
 

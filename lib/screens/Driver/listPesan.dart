@@ -59,6 +59,7 @@ class _ListPesanState extends State<ListPesan> {
                         if (snapshot.data?.data.user.length != 0) {
                           return ListView.builder(
                               scrollDirection: Axis.vertical,
+                              physics: NeverScrollableScrollPhysics(),
                               shrinkWrap: true,
                               itemCount: snapshot.data?.data.user.length,
                               itemBuilder: (context, index) {
